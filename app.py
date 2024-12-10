@@ -9,7 +9,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 import os
-import boto3
 import time,json
 import unittest
 
@@ -54,15 +53,6 @@ def lambda_handler(event=None, context=None):
     body_element = driver.find_element("tag name", "body").text  # Tìm thẻ <body>
     print("Nội dung văn bản của <body>:", body_element)
     WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, "body")))
-    screenshot_path = "/tmp/screenshot.png"
-    driver.save_screenshot(screenshot_path)
-    s3_key = "screenshots/screenshot.png"
-    Bucket1=os.environ.get('S3_BUCKET_NAME')
-    try:
-        with open(screenshot_path, "rb") as screenshot_file:
-            data1=s3_client.put_object(Bucket='selenium1234545', Key=s3_key, Body=screenshot_file)
-    except:
-        print("no permission to put into s3")
     title = driver.title
     
     timeout = 1
@@ -122,15 +112,6 @@ def lambda_handler(event=None, context=None):
     body_element = driver.find_element("tag name", "body").text  # Tìm thẻ <body>
     print("Nội dung văn bản của <body>:", body_element)
     WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, "body")))
-    screenshot_path = "/tmp/screenshot.png"
-    driver.save_screenshot(screenshot_path)
-    s3_key = "screenshots/screenshot.png"
-    Bucket1=os.environ.get('S3_BUCKET_NAME')
-    try:
-        with open(screenshot_path, "rb") as screenshot_file:
-            data1=s3_client.put_object(Bucket='selenium1234545', Key=s3_key, Body=screenshot_file)
-    except:
-        print("no permission to put into s3")
     title = driver.title
   
     driver.quit()
