@@ -117,3 +117,4 @@ def lambda_handler(event=None, context=None):
         "statusCode": 200,
         "body": f"{title}"
     }
+lambda_handler(1,2)
