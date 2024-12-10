@@ -11,8 +11,6 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 import os
 import time,json
 import unittest
-
-s3_client = boto3.client('s3')
 def lambda_handler1(event=None, context=None):
    print("test1")
 def lambda_handler(event=None, context=None):
