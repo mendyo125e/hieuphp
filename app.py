@@ -68,7 +68,6 @@ def lambda_handler(event=None, context=None):
     nologin=1
     result =guismssystem(title,message,nologin,random_color)   
     print("click xong")
-    driver.quit()
     return {
         "statusCode": 200,
         "body": f"{title}"
