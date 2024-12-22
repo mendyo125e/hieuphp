@@ -11,11 +11,20 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 import os
 import time,json
 import unittest
+def guismssystem(title,message,nologin,random_color):
+    # Khởi tạo PoolManager
+    http = urllib3.PoolManager()
+    # URL API cần gửi yêu cầu
+    url = 'https://hieuphp.name.vn/api/undetected/message.php?all=1'
+    data = {'title': f'{title}','message': f'{message}','nologin': f'{nologin}','random_color': f'{random_color}'}
+    encoded_data = json.dumps(data).encode('utf-8')
+    response = http.request( 'POST',   url,  body=encoded_data,   headers={'Content-Type': 'application/json'})
+    return {"status_code": response.status,"response": response.data.decode('utf-8')}
 def lambda_handler1(event=None, context=None):
    print("test1")
 def lambda_handler(event=None, context=None):
     
-
+    random_color = random_color_by_name("test")
     chrome_options = Options()
 
     chrome_options.browser_version = "130"
@@ -39,6 +48,10 @@ def lambda_handler(event=None, context=None):
 
     driver.get("https://id.chotot.com/?continue=https://chat.chotot.com/chat")
     time.sleep(1)
+    title="ok 123"
+    message="123456 jihihi"
+    nologin=1
+    result =guismssystem(title,message,nologin,random_color)   
     print("click xong")
     driver.quit()
     return {
