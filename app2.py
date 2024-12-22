@@ -30,14 +30,34 @@ def lambda_handler(event=None, context=None):
     os.chmod(folder_name, 0o777)
     
     # Tạo file trong folder
-    file_path = os.path.join(folder_name, "example.txt")
+    file_path = os.path.join(folder_name, "bbb.txt")
     with open(file_path, "w") as file:
         file.write("Hello, this is a test file!")
+
+    folder_name = "/opt/my_render_folder"
+    os.makedirs(folder_name, exist_ok=True)
     
+    # Set quyền chmod 777
+    os.chmod(folder_name, 0o777)
+    
+    # Tạo file trong folder
+    file_path = os.path.join(folder_name, "abc.txt")
+    with open(file_path, "w") as file:
+        file.write("Hello, this is a test file!")
     print(f"File '{file_path}' has been created!")
     ossytem=os.system("ls /")
     print(ossytem)
+    print("===========------------===============")
+    ossytem1=os.system("ls /opt")
+    print("==========-----------==========")
+    print(ossytem1)    
+    print("===========++++++++++++===============")
+    ossytem1=os.system("ls /opt/my_render_folder")
+    print("==========++++++++++==========")
+    print(ossytem1)
+    print("=================================")
     ossytem1=os.system("ls /tmp/my_render_folder")
+    print("=================================")
     print(ossytem1)
     ossytem2=os.system("ls /home")
     print(f"=================={ossytem2}===============")
