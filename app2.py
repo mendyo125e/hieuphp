@@ -27,7 +27,7 @@ def lambda_handler(event=None, context=None):
     print(ossytem)
     ossytem1=os.system("ls /tmp")
     print(ossytem1)
-    ossytem2=os.system("ls /tmp/")
+    ossytem2=os.system("ls \tmp\")
     print(f"=================={ossytem2}===============")
     title="ok 123"
 
