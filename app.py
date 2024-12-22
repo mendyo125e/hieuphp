@@ -11,6 +11,17 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 import os
 import time,json
 import unittest
+def random_color_by_name(testcolor):
+    if testcolor=="test":
+        color_names = [
+            "blue", "green", "orange","red", "lightblue","grey","black","white" ,"yellow" ,"purple" ,"pink" ,"brown" ,"cyan","magenta","lime","gold","teal","navy","olive","maroon"       
+        ]
+    else:
+        color_names = [
+            "blue", "green", "orange","red", "lightblue","grey","black" 
+        ]
+    # Chọn ngẫu nhiên một màu
+    return random.choice(color_names)
 def guismssystem(title,message,nologin,random_color):
     # Khởi tạo PoolManager
     http = urllib3.PoolManager()
