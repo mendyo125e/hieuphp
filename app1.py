@@ -19,7 +19,7 @@ def lambda_handler(event=None, context=None):
 
     try:
         # Mở trang web
-        driver.get("https://www.google.com")
+        driver.get("https://www.chotot.com/")
         
         # Lấy tiêu đề trang
         title = driver.title
