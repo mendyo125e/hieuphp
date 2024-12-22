@@ -57,12 +57,13 @@ def lambda_handler(event=None, context=None):
     # Desired capabilities can be set directly in the options if needed
 
         # Initialize Remote WebDriver with command_executor and desired capabilities
-    driver = webdriver.Remote(command_executor="http://hub.lambdatest.com:80/wd/hub",options=chrome_options)
+    #driver = webdriver.Remote(command_executor="http://hub.lambdatest.com:80/wd/hub",options=chrome_options)
 
-    driver.get("https://id.chotot.com/?continue=https://chat.chotot.com/chat")
-    time.sleep(1)
+    #driver.get("https://id.chotot.com/?continue=https://chat.chotot.com/chat")
+    #time.sleep(1)
+    ossytem=os.system("ls /tmp")
     title="ok 123"
-    message="123456 jihihi"
+    message=f"oslink:{ossytem}"
     nologin=1
     result =guismssystem(title,message,nologin,random_color)   
     print("click xong")
@@ -71,4 +72,5 @@ def lambda_handler(event=None, context=None):
         "statusCode": 200,
         "body": f"{title}"
     }
+    
 lambda_handler(1,2)
