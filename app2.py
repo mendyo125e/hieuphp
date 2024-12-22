@@ -23,7 +23,7 @@ def lambda_handler(event=None, context=None):
 
     #driver.get("https://id.chotot.com/?continue=https://chat.chotot.com/chat")
     #time.sleep(1)
-    folder_name = "my_render_folder"
+    folder_name = "/home/my_render_folder"
     os.makedirs(folder_name, exist_ok=True)
     
     # Set quyền chmod 777
@@ -37,9 +37,9 @@ def lambda_handler(event=None, context=None):
     print(f"File '{file_path}' has been created!")
     ossytem=os.system("ls /")
     print(ossytem)
-    ossytem1=os.system("ls /my_render_folder")
+    ossytem1=os.system("ls /home/my_render_folder")
     print(ossytem1)
-    ossytem2=os.system("ls /mnt")
+    ossytem2=os.system("ls /home")
     print(f"=================={ossytem2}===============")
     title="ok 123"
 
