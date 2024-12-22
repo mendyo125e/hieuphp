@@ -1,71 +1,30 @@
 import os
-import random
-import time,json
-import unittest
-def random_color_by_name(testcolor):
-    if testcolor=="test":
-        color_names = [
-            "blue", "green", "orange","red", "lightblue","grey","black","white" ,"yellow" ,"purple" ,"pink" ,"brown" ,"cyan","magenta","lime","gold","teal","navy","olive","maroon"       
-        ]
-    else:
-        color_names = [
-            "blue", "green", "orange","red", "lightblue","grey","black" 
-        ]
-    # Chọn ngẫu nhiên một màu
-    return random.choice(color_names)
+import requests
+import zipfile
 
-def lambda_handler(event=None, context=None):
-    
-    # Desired capabilities can be set directly in the options if needed
+# URL của file ZIP
+url = "https://www.unikey.org/assets/release/unikey46RC2-230919-win64.zip"  # Thay URL này bằng đường dẫn tới file ZIP của bạn
 
-        # Initialize Remote WebDriver with command_executor and desired capabilities
-    #driver = webdriver.Remote(command_executor="http://hub.lambdatest.com:80/wd/hub",options=chrome_options)
+# Thư mục đích là `/tmp`
+destination_folder = "/tmp"
+zip_file_path = os.path.join(destination_folder, "downloaded_file.zip")
 
-    #driver.get("https://id.chotot.com/?continue=https://chat.chotot.com/chat")
-    #time.sleep(1)
-    folder_name = "/tmp/my_render_folder"
-    os.makedirs(folder_name, exist_ok=True)
-    
-    # Set quyền chmod 777
-    os.chmod(folder_name, 0o777)
-    
-    # Tạo file trong folder
-    file_path = os.path.join(folder_name, "bbb.txt")
-    with open(file_path, "w") as file:
-        file.write("Hello, this is a test file!")
+# Bước 1: Tải file ZIP từ URL
+response = requests.get(url, stream=True)
+if response.status_code == 200:
+    with open(zip_file_path, "wb") as file:
+        for chunk in response.iter_content(chunk_size=8192):
+            file.write(chunk)
+    print(f"Downloaded ZIP file to: {zip_file_path}")
+else:
+    print(f"Failed to download file. HTTP status code: {response.status_code}")
+    exit(1)
 
-    folder_name = "/opt/my_render_folder"
-    os.makedirs(folder_name, exist_ok=True)
-    
-    # Set quyền chmod 777
-    os.chmod(folder_name, 0o777)
-    
-    # Tạo file trong folder
-    file_path = os.path.join(folder_name, "abc.txt")
-    with open(file_path, "w") as file:
-        file.write("Hello, this is a test file!")
-    print(f"File '{file_path}' has been created!")
-    ossytem=os.system("ls /")
-    print(ossytem)
-    print("===========------------===============")
-    ossytem1=os.system("ls /opt")
-    print("==========-----------==========")
-    print(ossytem1)    
-    print("===========++++++++++++===============")
-    ossytem1=os.system("ls /opt/my_render_folder")
-    print("==========++++++++++==========")
-    print(ossytem1)
-    print("=================================")
-    ossytem1=os.system("ls /tmp/my_render_folder")
-    print("=================================")
-    print(ossytem1)
-    ossytem2=os.system("ls /home")
-    print(f"=================={ossytem2}===============")
-    title="ok 123"
+# Bước 2: Giải nén file ZIP trong thư mục `/tmp`
+extracted_folder = os.path.join(destination_folder, "extracted_files")
+os.makedirs(extracted_folder, exist_ok=True)  # Tạo thư mục nếu chưa tồn tại
 
-    return {
-        "statusCode": 200,
-        "body": f"{title}"
-    }
-    
-lambda_handler(1,2)
+with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
+    zip_ref.extractall(extracted_folder)
+
+print(f"Extracted files to: {extracted_folder}")
