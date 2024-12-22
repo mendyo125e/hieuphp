@@ -1,79 +1,39 @@
-def web_driver():
-
-options = webdriver.ChromeOptions()
-
-options.add_argument("--verbose")
-
-options.add_argument('--no-sandbox')
-
-options.add_argument('--headless')
-
-options.add_argument('--disable-gpu')
-
-options.add_argument("--window-size=1920, 1200")
-
-options.add_argument('--disable-dev-shm-usage')
-
-driver = webdriver.Chrome(options=options)
-
-return driver
-
-driver = web_driver()
-
-import time
-
-from selenium.webdriver.common.keys import Keys
-
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
 
-driver.get('https://accounts.google.com/')
+def lambda_handler(event=None, context=None):
+    # Cấu hình trình duyệt
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")  # Chạy chế độ không giao diện
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    
+    # Khởi tạo WebDriver
+    driver = webdriver.Chrome(
+        service=Service(ChromeDriverManager().install()),
+        options=chrome_options
+    )
 
-time.sleep(1)
+    try:
+        # Mở trang web
+        driver.get("https://www.example.com")
+        
+        # Lấy tiêu đề trang
+        title = driver.title
+        
+        # Đóng trình duyệt
+        driver.quit()
 
-timeout = 10
-
-end_time = time.time() + timeout
-
-while True:
-
-try:
-
-email_input = driver.find_element(By.CSS_SELECTOR, 'input[type="email"]')
-
-# Nhập email vào ô input
-
-email_input.send_keys('hieuphp@gmail.com')
-
-email_input.send_keys(Keys.RETURN)
-
-break
-
-except Exception as e:
-
-# lỗi xử lý hàm
-
-print("Lỗi xử lý email")
-
-time.sleep(1)
-
-if time.time() > end_time:
-
-print("Lỗi thời gian tối đa email")
-
-break
-
-
-
-time.sleep(3)
-
-print("Title của cửa sổ mới:", driver.title)
-
-body_element = driver.find_element("tag name", "body").text # Tìm thẻ <body>
-
-print("Nội dung văn bản của <body>:", body_element)
-
-timeout = 10
-
-end_time = time.time() + timeout
-
-driver.quit()
+        return {
+            "statusCode": 200,
+            "body": f"Title of the page is: {title}"
+        }
+    except Exception as e:
+        driver.quit()
+        return {
+            "statusCode": 500,
+            "body": f"Error occurred: {str(e)}"
+        }
