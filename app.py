@@ -48,69 +48,7 @@ def lambda_handler(event=None, context=None):
     except Exception as e:
         print("click xong")
 
-    body_element = driver.find_element("tag name", "body").text  # Tìm thẻ <body>
-    print("Nội dung văn bản của <body>:", body_element)
-    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, "body")))
-    title = driver.title
     
-    timeout = 1
-    all_windows = driver.window_handles
-
-# Chuyển đến cửa sổ mới (là cửa sổ thứ hai trong danh sách)
-    driver.switch_to.window(all_windows[1])
-    end_time = time.time() + timeout
-
-    time.sleep(1)
-    timeout = 5
-    end_time = time.time() + timeout
-    while True:
-        try:
-            email_input = driver.find_element(By.CSS_SELECTOR, 'input[type="email"]')
-            # Nhập email vào ô input
-            email_input.send_keys('hieuphp@gmail.com')
-            email_input.send_keys(Keys.RETURN)
-            break
-        except Exception as e:
-            # lỗi xử lý hàm
-            print("Lỗi xử lý email")
-            time.sleep(1)
-        if time.time() > end_time:
-            print("Lỗi thời gian tối đa email") 
-            break    
-    time.sleep(3)
-    timeout = 5
-    end_time = time.time() + timeout
-    while True:
-        try:
-            pass_input = driver.find_element(By.CSS_SELECTOR, 'input[type="password"]')
-            # Nhập email vào ô input
-            pass_input.send_keys('Admin12@')
-            pass_input.send_keys(Keys.RETURN)
-            break
-        except Exception as e:
-            # lỗi xử lý hàm
-            print("Lỗi xử lý pass")
-            time.sleep(1)
-        if time.time() > end_time:
-            print("Lỗi thời gian tối đa pass") 
-            break  
-    time.sleep(1)
-    body_element = driver.find_element("tag name", "body").text  # Tìm thẻ <body>
-    print("Nội dung văn bản của <body>:", body_element)
-    all_windows = driver.window_handles
-    
-    # Chuyển sang cửa sổ mới (cửa sổ cuối cùng)
-    driver.switch_to.window(all_windows[-1])
-
-    # Thực hiện các thao tác trên cửa sổ mới
-    print("Title của cửa sổ mới:", driver.title)
-
-    # Chuyển về cửa sổ ban đầu
-    driver.switch_to.window(all_windows[0])
-    body_element = driver.find_element("tag name", "body").text  # Tìm thẻ <body>
-    print("Nội dung văn bản của <body>:", body_element)
-    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, "body")))
-    title = driver.title
   
     driver.quit()
     return {
