@@ -39,17 +39,7 @@ def lambda_handler(event=None, context=None):
 
     driver.get("https://id.chotot.com/?continue=https://chat.chotot.com/chat")
     time.sleep(1)
-    try:
-        # Tìm và click vào nút "Login với Google"
-        submit_button = driver.find_elements(By.CSS_SELECTOR, 'button.mocked-styled-18.b10u9umr')[1]
-        actions = ActionChains(driver)
-        actions.click_and_hold(submit_button).pause(2).release().perform()
-        # Kiểm tra nếu có ít nhất 2 nút  
-    except Exception as e:
-        print("click xong")
-
-    
-  
+    print("click xong")
     driver.quit()
     return {
         "statusCode": 200,
