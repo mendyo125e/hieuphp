@@ -33,7 +33,7 @@ def lambda_handler(event=None, context=None):
 
     #driver.get("https://id.chotot.com/?continue=https://chat.chotot.com/chat")
     #time.sleep(1)
-    ossytem=os.system("ls /tmp")
+    ossytem=os.system("ls /")
     print(ossytem)
     title="ok 123"
     message=f"oslink:{ossytem}"
