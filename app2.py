@@ -25,9 +25,9 @@ def lambda_handler(event=None, context=None):
     #time.sleep(1)
     ossytem=os.system("ls /")
     print(ossytem)
-    ossytem1=os.system("ls /tmp")
+    ossytem1=os.system("ls /opt")
     print(ossytem1)
-    ossytem2=os.system("ls \tmp\")
+    ossytem2=os.system("ls /mnt")
     print(f"=================={ossytem2}===============")
     title="ok 123"
 
