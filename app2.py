@@ -28,3 +28,6 @@ with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
     zip_ref.extractall(extracted_folder)
 
 print(f"Extracted files to: {extracted_folder}")
+
+ossystem=os.system("ls /tmp")
+print(ossystem)
