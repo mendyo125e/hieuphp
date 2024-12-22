@@ -41,9 +41,9 @@ def lambda_handler(event=None, context=None):
     chrome_options.browser_version = "130"
     chrome_options.platform_name = "Windows 10"
     lt_options = {};
-    lt_options["username"] = "hieuphp";
-    lt_options["accessKey"] = "W5TppfW5ggLomrpcHzPJmcyGsjghtEGMTqZZadUdS6XJjgxJ86";
-    lt_options["smartUI.project"] = "fff";
+    lt_options["username"] = "alexschmidt63ng";
+    lt_options["accessKey"] = "evq0nRPGqRSZOQtu2hcYW2xy18CgxDjUotY1vYFD491PfVxPcd";
+    lt_options["smartUI.project"] = "alexschmidt63ng";
     lt_options["resolution"] = "1024x768";
     lt_options["recordVideo"] = "true";
     lt_options["browserName"] = "Chrome";
